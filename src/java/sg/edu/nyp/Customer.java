@@ -25,6 +25,7 @@ public class Customer implements Serializable {
     private String HomePhone;
     private String KrisFlyer;
     private String Password;
+    
 
     public String getNRICNo() {
         return NRICNo;
