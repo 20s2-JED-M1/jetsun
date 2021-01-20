@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -100,6 +102,75 @@ public class CustomerManagementEJB {
             }
         }
         return success;
+    }
+     
+     public List<Booking> getAllBookings(String NRICNo) {
+        //Declaration
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultset = null;
+        
+        List<Booking> searchResult = new ArrayList<>();
+//        String searchTerm = request.getParameter("searchterm");
+        
+        try {
+            String sqlSelect = "SELECT * FROM booking WHERE NRICNo = ?";
+            //+ "'%" + searchTerm + "%'";
+            
+            //Initialization
+            connection = customerManagement.getConnection();
+            statement = connection.prepareStatement(sqlSelect);
+            statement.setString(1, "%" + NRICNo + "%");
+            resultset = statement.executeQuery();
+            
+            //retrieval
+            while(resultset.next()) {
+                //Create a book object
+                Booking booking = new Booking();
+                
+                //retrieve data and set it into book object
+                String nricNo = resultset.getString("NRICNo");
+                booking.setNRICNo(nricNo);
+                
+                booking.setFlightCode(resultset.getInt("FlightCode"));
+                booking.setSeatID(resultset.getInt("SeatId"));
+                booking.setEmployeeID(resultset.getInt("EmployeeID"));
+                booking.setTimestamp(resultset.getDate("Timestamp"));
+                
+                //add the book into the list
+                searchResult.add(booking);
+                System.out.println("FlightCode: " + booking.getFlightCode());
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+        } finally {
+            if(resultset != null){
+                try {
+                resultset.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(statement != null){
+                try {
+                statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            };
+        }
+        return searchResult;
     }
 }
      
