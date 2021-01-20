@@ -29,10 +29,10 @@ and open the template in the editor.
             Passport Expiry Date: <input type="date" name="expirydate" required/><br/>
             Mobile Number: <input type="number" name="mobileno" required/><br/>
             Password: <input type="password" name="password" id="pass1" required/><br/>
-            Reconfirm Password: <input type="cfmpassword" name="cfmpassword" id="pass2" required/><br/>
+            Reconfirm Password: <input type="password" name="cfmpassword" id="pass2" required/><br/>
 
 
-            Profession: <input type="text" name="profession"/><br/>
+           
             Date Of Birth: <input type="date" name="dob"/><br/>
             Office Phone Number: <input type="number" name="officeno"/><br/>
             Home Phone Number: <input type="number" name="homeno"/><br/>
