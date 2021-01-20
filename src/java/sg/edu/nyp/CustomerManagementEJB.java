@@ -27,6 +27,7 @@ import javax.sql.DataSource;
  */
 @Stateless
 public class CustomerManagementEJB {
+    //Test Push For BLOO
     
      @Resource(name = "jdbc/jed")
     private DataSource customerManagement;
