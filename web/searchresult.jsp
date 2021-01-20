@@ -17,7 +17,6 @@
             Search results for "<b><%=session.getAttribute("searchterm")%></b>"
         </p>
         <hr/>
-        <p>
             <!--Results-->
             <table>
                 <tr>
@@ -26,6 +25,7 @@
                     <th>Destination</th>
                     <th>Departure Date</th>
                     <th>Flight Vacancy</th>
+                    <th>Book</th>
                 </tr>
                 <%
                     List<Flight> searchresult = (List<Flight>)session.getAttribute("searchresult");
@@ -44,15 +44,15 @@
                     <td><%=book.getDestination()%></td>
                     <td><%=book.getDepartureDate()%></td>
                     <td><%=book.getFlightVacancy()%></td>
+                    <td><a href="booking.jsp"><button>Book</button></a></td>
                 </tr>
                 <%
                         }
                     }
                 %>
             </table>
-        </p>
         <hr/>
-        <a href="search.html">Do another search</a><br/>
-        <a href="index.html">Go back to menu</a>
+        <a href="searchflight.jsp">Do another search</a><br/>
+        <a href="menu.jsp">Go back to menu</a>
     </body>
 </html>
