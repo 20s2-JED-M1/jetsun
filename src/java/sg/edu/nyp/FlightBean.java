@@ -83,4 +83,57 @@ public class FlightBean {
         }
         return searchResult;
     }
+    public List<Seat> displaySeat(String flightCode){
+        List<Seat> seatList = new ArrayList<>();
+        try{
+            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking on s.Id != b.SeatID inner join collabproj.flight on b.FlightCode = f.FlightCode where b.FlightCode = ?";
+            //Initializing
+            //Get the connection from the DataSource
+            connection = dsBookCatalogue.getConnection();
+            //Create a state,emt using the Connection
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%" + flightCode + "%");
+            //Make a query to the DB using ResultSet through the Statement
+            resultset = statement.executeQuery();
+
+            //retrieval
+            while(resultset.next()){
+                //Create a book object
+                Seat seats = new Seat();
+                //Retrieve the data from the recordset and store it into a book object.
+                seats.setId(resultset.getInt("Id"));
+                seats.setSeatNum(resultset.getString("SeatNum"));
+                //Store the book object into the list
+                seatList.add(seats);
+            }
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+        } finally {
+            //clean up memory
+            if(resultset != null){
+                try {
+                    resultset.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return seatList;
+    }
 }

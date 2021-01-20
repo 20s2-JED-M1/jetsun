@@ -17,6 +17,7 @@
             Search results for "<b><%=session.getAttribute("searchterm")%></b>"
         </p>
         <hr/>
+        <form action="seat" method="post" name="buy">
             <!--Results-->
             <table>
                 <tr>
@@ -44,13 +45,15 @@
                     <td><%=book.getDestination()%></td>
                     <td><%=book.getDepartureDate()%></td>
                     <td><%=book.getFlightVacancy()%></td>
-                    <td><a href="booking.jsp"><button>Book</button></a></td>
+                    <td><input type="submit" value="Book Seat"></td>
                 </tr>
-                <%
-                        }
-                    }
-                %>
             </table>
+            <input type="hidden" id="flightCode" name="flightCode" value="<%=book.getFlightCode()%>">
+            <%
+                    }
+                }
+            %>
+        </form>
         <hr/>
         <a href="searchflight.jsp">Do another search</a><br/>
         <a href="menu.jsp">Go back to menu</a>
