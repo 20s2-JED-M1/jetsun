@@ -1,3 +1,4 @@
+<%@page import="sg.edu.nyp.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,8 +8,24 @@
     </head>
     <body>
         <h1>Menu</h1>
+        <%
+                Customer customer = (Customer) session.getAttribute("customer");
+            %>
+        <h3>
+            Welcome, <%=customer.getName()%>!
+            <br/>
+        </h3>
         <a href="searchflight.jsp">Book a Flight</a>
         <a href="retrieveBookings.jsp">Retrieve Past Booking</a>
         <a href="manageAccount.jsp">Manage Account</a>
+        <br/>
+        <br/>
+        <form action="logout" method="post">
+	    <input type="submit" value="Log Out"/>
+	</form>      
+        <%
+            //Clear the message at the end of the JSP
+            session.setAttribute("message",null);
+        %>
     </body>
 </html>

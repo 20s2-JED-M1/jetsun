@@ -19,14 +19,19 @@ import javax.servlet.http.HttpSession;
  * @author 184461L
  */
 @WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class LogoutServlet extends HttpServlet {   
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //end session
+        //End the session
         HttpSession session = request.getSession();
         session.invalidate();
-        
-        response.sendRedirect(this.getServletContext().getContextPath() +
-                "/index.jsp");
+        //Or Alternatively, request.getSession().invalidate();
+        System.out.println("=====================");
+        System.out.println("In LogoutServlet");
+        System.out.println("=====================");
+        //Do a client-side redirect to the index page
+        response.sendRedirect(this.getServletContext().getContextPath()+ "/index.jsp");
     }
 }
+
