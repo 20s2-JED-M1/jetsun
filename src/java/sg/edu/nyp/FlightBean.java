@@ -28,13 +28,14 @@ public class FlightBean {
     public List<Flight> searchFlight(String searchTerm){
         List<Flight> searchResult = new ArrayList<>();
         try {
-            String sql = "select * from flight where title like ?";
+            String sql = "select * from flight where destination like ? or Departure like ?";
             //Initializing
             //Get the connection from the DataSource
             connection = dsBookCatalogue.getConnection();
             //Create a state,emt using the Connection
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%" + searchTerm + "%");
+            statement.setString(2, "%" + searchTerm + "%");
             //Make a query to the DB using ResultSet through the Statement
             resultset = statement.executeQuery();
 
