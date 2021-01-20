@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package sg.edu.nyp;
 
 import java.io.Serializable;
@@ -18,14 +12,13 @@ public class Customer implements Serializable {
     private String HomeAdd;
     private String BillingAdd;
     private String PassportNo;
-    private String PassportExpiry;
+    private Date PassportExpiry;
     private String MobilePhone;
     private Date DoB;
     private String OfficePhone;
     private String HomePhone;
     private String KrisFlyer;
     private String Password;
-    
 
     public String getNRICNo() {
         return NRICNo;
@@ -83,11 +76,11 @@ public class Customer implements Serializable {
         this.PassportNo = PassportNo;
     }
 
-    public String getPassportExpiry() {
+    public Date getPassportExpiry() {
         return PassportExpiry;
     }
 
-    public void setPassportExpiry(String PassportExpiry) {
+    public void setPassportExpiry(Date PassportExpiry) {
         this.PassportExpiry = PassportExpiry;
     }
 
@@ -139,6 +132,3 @@ public class Customer implements Serializable {
         this.Password = Password;
     }
 }
-    
-
-   

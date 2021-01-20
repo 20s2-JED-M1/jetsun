@@ -7,5 +7,8 @@
     </head>
     <body>
         <h1>Menu</h1>
+        <a href="searchflight.jsp">Book a Flight</a>
+        <a href="retrieveBookings.jsp">Retrieve Past Booking</a>
+        <a href="manageAccount.jsp">Manage Account</a>
     </body>
 </html>
