@@ -1,10 +1,10 @@
-[<!DOCTYPE html>
+<!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<!--<html>
+<html>
     <head>
         <title>SaveMore IT Store</title>
         <meta charset="UTF-8">
@@ -13,22 +13,35 @@ and open the template in the editor.
     </head>
     <body>
 
-        <form name="user" action="validate" method="post" onsubmit="return matchPassword()">
+        <form name="register" action="validate" method="post" onsubmit="return matchPassword()">
+
+            NRIC No: <input type="text" name="nric" required/><br/>
+            Title : <select name="title" id="title">
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
             
-                Full Name : <input type="text" name="fullname" required/><br/>
-                Email Address : <input type="text" name="email" required/><br/>
-                Address Line 1 : <input type="text" name="addressline1" required/><br/>
-                Address Line 2 : <input type="text" name="addressline2" /><br/>
-                Postal Code : <input type="text" name="postalcode" placeholder="Six Digits Only" pattern="[0-9]{6}" title="Six Digits Only"  required/><br/>
-                
-                Mobile Number : <input type="text" name="mobile" placeholder="Eight Digits Only" pattern="[0-9]{8}" title="Eight Digits Only"  required/><br/>
-                
-                Password : <input type="password" name="password" id="pass1" required/><br/>
-                Confirm Password : <input type="password" name="confirmPassword" id="pass2" required/><br/>
-            
+            </select><br/>
+            Name : <input type="text" name="name" required/><br/>
+            Email : <input type="email" name="email" /><br/>
+            Home Address <input type="text" name="address"/><br/>
+            Passport Number : <input type="number" name="passportno"  required/><br/>
+            Passport Expiry Date: <input type="date" name="expirydate" required/><br/>
+            Mobile Number: <input type="number" name="mobileno" required/><br/>
+            Password: <input type="password" name="password" required/><br/>
+            Reconfirm Password: <input type="cfmpassword" name="cfmpassword" required/><br/>
+
+
+            Profession: <input type="text" name="profession"/><br/>
+            Date Of Birth: <input type="date" name="dob"/><br/>
+            Office Phone Number: <input type="number" name="officeno"/><br/>
+            Home Phone Number: <input type="number" name="homeno"/><br/>
+            KrisFlyer Membership Number <input type="number" name="memberno"/><br/>
+            Biling Address: <input type="text" name="billingaddress"/><br/>
+
             <input type="submit" value="Register"/> <br/>
         </form>
         <br/>
-        <a href="index.html">Already have an account?</a>
+        <a href="index.jsp">Already have an account?</a>
     </body>
-</html>-->
+</html>
