@@ -28,6 +28,7 @@ public class SeatServlet extends HttpServlet {
             HttpServletResponse response)
             throws IOException, ServletException{
         String flightCode = request.getParameter("flightCode");
+        System.out.println("flightCode: " + flightCode);
         List<Seat> seatResult = new ArrayList<>();
         seatResult = flightBean.displaySeat(flightCode);
         
