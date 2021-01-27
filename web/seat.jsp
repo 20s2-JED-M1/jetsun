@@ -13,9 +13,13 @@
         <table>
             <th>Seat Number</th>
             <%
-                List<Seat> searchresult = (List<Seat>)session.getAttribute("flightCode");
+                System.out.println("Before searchresult");
+                List<Seat> searchresult = (List<Seat>)session.getAttribute("seatResult");
+                System.out.println("After searchresult");
                 if(searchresult != null || searchresult.size() >= 0){
+                    System.out.println("Inside if statemenet");
                     for(Seat seat : searchresult){
+                        System.out.println("Inside for statement");
             %>
             <tr>
                 <td><%=seat.getSeatNum()%></td>
