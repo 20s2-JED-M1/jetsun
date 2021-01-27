@@ -13,7 +13,7 @@
         <table>
             <th>Seat Number</th>
             <%
-                List<Seat> searchresult = (List<Seat>)session.getAttribute("flightCode");
+                List<Seat> searchresult = (List<Seat>)session.getAttribute("seatResult");   
                 if(searchresult != null || searchresult.size() >= 0){
                     for(Seat seat : searchresult){
             %>
