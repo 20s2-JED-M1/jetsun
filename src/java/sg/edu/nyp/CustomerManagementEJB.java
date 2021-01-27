@@ -121,8 +121,9 @@ public class CustomerManagementEJB {
             //Initialization
             connection = customerManagement.getConnection();
             statement = connection.prepareStatement(sqlSelect);
-            statement.setString(1, "%" + NRICNo + "%");
+            statement.setString(1, NRICNo);
             resultset = statement.executeQuery();
+            System.out.println(sqlSelect);
             
             //retrieval
             while(resultset.next()) {
