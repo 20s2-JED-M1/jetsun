@@ -8,6 +8,7 @@ package sg.edu.nyp;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -38,14 +39,19 @@ public class EditProfileServlet extends HttpServlet {
         
         boolean changedPassword = false;
         
+        Customer customer = (Customer) request.getSession().getAttribute("customer");
+        ResultSet resultset = null;
+        
         String email = request.getParameter("email");
         String password1 = request.getParameter("password1"); 
         String password2 = request.getParameter("password2");
         
-        System.out.println(email);
-        System.out.println(request.getSession().getAttribute("email"));
+        System.out.println("Request parameter email: " + email);
         
-        if(email.equals(request.getSession().getAttribute("email"))){ //Check email
+                System.out.println("Request parameter email: " + customer.getEmail());
+
+        
+        if(email.equals(customer.getEmail())){ //Check email
             if(password1.equals(password2)){ //Check Password
                 //Do Update Password
                 String finalpassword = password1;
@@ -58,15 +64,15 @@ public class EditProfileServlet extends HttpServlet {
                 System.out.println(changedPassword);
                 if(changedPassword){
                     request.getSession().setAttribute("changePasswordSuccess", "Successfully changed password!");
-                    response.sendRedirect(this.getServletContext().getContextPath() + "/changepassword.jsp");
+                    response.sendRedirect(this.getServletContext().getContextPath() + "/editAccountDetails.jsp");
                 } else {
                     request.getSession().setAttribute("changePasswordFailed", "Failed to changed password!");
-                    response.sendRedirect(this.getServletContext().getContextPath() + "/changepassword.jsp");
+                    response.sendRedirect(this.getServletContext().getContextPath() + "/editAccountDetails.jsp");
                 }
             }
         } else {
             request.getSession().setAttribute("wrongEmailPasswordChange", "Wrong email!");
-            response.sendRedirect(this.getServletContext().getContextPath() + "/changepassword.jsp");
+            response.sendRedirect(this.getServletContext().getContextPath() + "/editAccountDetails.jsp");
         }
     }
     
