@@ -26,6 +26,7 @@ public class FlightBean {
     PreparedStatement statement = null;
     ResultSet resultset = null;
     public List<Flight> searchFlight(String searchTerm){
+//        System.out.println("FlightBean searchTerm: " + searchTerm);
         List<Flight> searchResult = new ArrayList<>();
         try {
             String sql = "select * from flight where destination like ? or Departure like ?";
@@ -84,15 +85,16 @@ public class FlightBean {
         return searchResult;
     }
     public List<Seat> displaySeat(String flightCode){
+//        System.out.println("displaySeat: " + flightCode);
         List<Seat> seatList = new ArrayList<>();
         try{
-            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking on s.Id != b.SeatID inner join collabproj.flight on b.FlightCode = f.FlightCode where b.FlightCode = ?";
+            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
             //Initializing
             //Get the connection from the DataSource
             connection = dsBookCatalogue.getConnection();
             //Create a state,emt using the Connection
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + flightCode + "%");
+            statement.setString(1, flightCode);
             //Make a query to the DB using ResultSet through the Statement
             resultset = statement.executeQuery();
 

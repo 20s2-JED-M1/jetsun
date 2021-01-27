@@ -15,6 +15,6 @@
                 <input type="submit" value="Search"/>
             </p>
         </form>
-        <a href="index.html">Back</a>
+        <a href="/jetsun/menu.jsp">Back</a>
     </body>
 </html>
