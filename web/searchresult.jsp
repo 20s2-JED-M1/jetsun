@@ -47,11 +47,12 @@
                     <td><%=book.getFlightVacancy()%></td>
                     <td><input type="submit" value="Book Seat"></td>
                 </tr>
+                 <input type="hidden" id="flightCode" name="flightCode" value="<%=book.getFlightCode()%>">
+                 <%
+                    }%>
             </table>
-            <input type="hidden" id="flightCode" name="flightCode" value="<%=book.getFlightCode()%>">
-            <%
-                    }
-                }
+           
+            <% }
             %>
         </form>
         <hr/>

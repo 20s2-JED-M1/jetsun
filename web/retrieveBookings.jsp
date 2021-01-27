@@ -16,11 +16,11 @@
         <h1>RETRIEVE BOOKINGS</h1>
         <table>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Year Published</th>
-                <th>Publisher</th>
-                <th>About</th>
+                <th>NRIC No.</th>
+                <th>Flight Code</th>
+                <th>Seat ID</th>
+                <th>Employee ID</th>
+                <th>Timestamp</th>
             </tr>
             <%
                 List<Booking> searchResult = (List<Booking>) session.getAttribute("getAllBookings");
@@ -44,6 +44,6 @@
                 }
             %>
         </table>
-        <a href="/menu.jsp">Back To Main Menu</a>
+        <a href="/jetsun/menu.jsp">Back To Main Menu</a>
     </body>
 </html>

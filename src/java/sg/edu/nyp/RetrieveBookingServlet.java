@@ -30,10 +30,13 @@ public class RetrieveBookingServlet extends HttpServlet{
             HttpServletResponse response)
             throws IOException, ServletException {
         
-        String nricNo = "gfffff";
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
+        String nricNo = customer.getNRICNo();
         List<Booking> allBookings = customerManagementEJB.getAllBookings(nricNo);
         
-        HttpSession session = request.getSession();
+        System.out.println(allBookings);
+        
         session.setAttribute("getAllBookings", allBookings);
         
         response.sendRedirect(this.getServletContext().getContextPath() + "/retrieveBookings.jsp");
