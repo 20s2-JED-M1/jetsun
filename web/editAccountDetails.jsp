@@ -33,6 +33,11 @@
                 <%=session.getAttribute("wrongEmailPasswordChange")==null?"":session.getAttribute("wrongEmailPasswordChange")%><br/>
                 </font>
             </form>
+                <%
+            session.setAttribute("changePasswordSuccess", null);
+            session.setAttribute("changePasswordFailed", null);
+            session.setAttribute("wrongEmailPasswordChange", null);
+        %>
         </p>
         <a href="account.jsp">Back</a><br/>
     </body>

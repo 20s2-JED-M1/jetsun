@@ -34,7 +34,7 @@ public class CustomerManagementEJB {
      
      public boolean changePassword(String email, String password) throws NoSuchAlgorithmException {
         String hashedPassword = null;
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] bytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {
