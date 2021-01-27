@@ -13,9 +13,7 @@
         <table>
             <th>Seat Number</th>
             <%
-                System.out.println("Before searchresult");
-                List<Seat> searchresult = (List<Seat>)session.getAttribute("seatResult");
-                System.out.println("After searchresult");
+                List<Seat> searchresult = (List<Seat>)session.getAttribute("seatResult");   
                 if(searchresult != null || searchresult.size() >= 0){
                     System.out.println("Inside if statemenet");
                     for(Seat seat : searchresult){
