@@ -86,13 +86,13 @@ public class FlightBean {
     public List<Seat> displaySeat(String flightCode){
         List<Seat> seatList = new ArrayList<>();
         try{
-            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking on s.Id != b.SeatID inner join collabproj.flight on b.FlightCode = f.FlightCode where b.FlightCode = ?";
+            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
             //Initializing
             //Get the connection from the DataSource
             connection = dsBookCatalogue.getConnection();
             //Create a state,emt using the Connection
             statement = connection.prepareStatement(sql);
-            statement.setString(1, "%" + flightCode + "%");
+            statement.setString(1, flightCode);
             //Make a query to the DB using ResultSet through the Statement
             resultset = statement.executeQuery();
 
@@ -135,5 +135,10 @@ public class FlightBean {
             }
         }
         return seatList;
+    }
+    public boolean bookSeat(int seatid, String flightCode)
+    {
+       // UPDATE collabproj.flight SET FlightVacancy = FlightVacancy - 1 WHERE FlightCode = 1;
+        return true;
     }
 }
