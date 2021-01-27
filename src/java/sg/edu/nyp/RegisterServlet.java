@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
-    @Resource(name = "jdbc/collabproj")
+    @Resource(name = "jdbc/jed")
     private DataSource dbRegister;
 
     public static String getSha256(String value) {
@@ -86,12 +86,12 @@ public class RegisterServlet extends HttpServlet {
             sqlInsertAccFirstPart += ", OfficePhone";
             sqlInsertAccSecondPart += ", ?";
         }
-        if (dob != null && !dob.isEmpty()) {
+        if (homeno != null && !homeno.isEmpty()) {
             sqlInsertAccFirstPart += ", HomePhone";
             sqlInsertAccSecondPart += ", ?";
         }
-        if (dob != null && !dob.isEmpty()) {
-            sqlInsertAccFirstPart += ", KirsFlyer";
+        if (memberno != null && !memberno.isEmpty()) {
+            sqlInsertAccFirstPart += ", KrisFlyer";
             sqlInsertAccSecondPart += ", ?";
         }
 
@@ -111,6 +111,7 @@ public class RegisterServlet extends HttpServlet {
             System.out.println("Front half + " + sqlInsertAccFirstPart);
             System.out.println("Back half + " + sqlInsertAccSecondPart);
             preparedStatement = connection.prepareStatement(sqlInsertAccFirstPart + sqlInsertAccSecondPart);
+            //preparedStatement = connection.prepareStatement("Select * from Customer");
             preparedStatement.setString(1, nric);
             preparedStatement.setString(2, title);
             preparedStatement.setString(3, name);
