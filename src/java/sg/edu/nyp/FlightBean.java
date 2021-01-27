@@ -136,9 +136,99 @@ public class FlightBean {
         }
         return seatList;
     }
-    public boolean bookSeat(int seatid, String flightCode)
+    public boolean bookSeat(int seatid, int flightCode, String NRIC, int employeeid)
     {
-       // UPDATE collabproj.flight SET FlightVacancy = FlightVacancy - 1 WHERE FlightCode = 1;
+       // 
+        // 
+          try{
+              
+            String sql = "INSERT INTO collabproj.booking (NRICNo, FlightCode,SeatID, EmployeeID, TIMESTAMP) VALUES ( ?,?,?,?,CURRENT_TIMESTAMP)";
+            //Initializing
+            //Get the connection from the DataSource
+            connection = dsBookCatalogue.getConnection();
+            //Create a state,emt using the Connection
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, NRIC);
+            statement.setInt(2, flightCode);
+            statement.setInt(3, seatid);
+            statement.setInt(4, employeeid);
+            //Make a query to the DB using ResultSet through the Statement
+            resultset = statement.executeQuery();
+          
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+        } finally {
+            //clean up memory
+            if(resultset != null){
+                try {
+                    resultset.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
         return true;
     }
+    public boolean updateVacancy(int flightCode)
+    {
+       try{
+              
+            String sql = "UPDATE collabproj.flight SET FlightVacancy = FlightVacancy - 1 WHERE FlightCode = ?";
+            //Initializing
+            //Get the connection from the DataSource
+            connection = dsBookCatalogue.getConnection();
+            //Create a state,emt using the Connection
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, flightCode);
+  
+            //Make a query to the DB using ResultSet through the Statement
+            resultset = statement.executeQuery();
+          
+        }catch(SQLException ex) {
+            ex.printStackTrace();
+            System.err.println(ex.getMessage());
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+        } finally {
+            //clean up memory
+            if(resultset != null){
+                try {
+                    resultset.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(statement != null){
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return true;
+    }
+
 }

@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Book Flight</h1>
-        <form action="bookseat" name="name" method="post">
+        <form action="post" name="Book flight">
         <table>
             <th>Seat Number</th>
             <%
