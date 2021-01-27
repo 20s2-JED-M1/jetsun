@@ -15,7 +15,7 @@
             Welcome, <%=customer.getName()%>!
             <br/>
         </h3>
-        <a href="searchflight.jsp">Book a Flight</a>
+            <a href="searchflight.jsp">Book a Flight</a><br>
         <a href="editAccountDetails.jsp">Edit Account</a>
         <form action="retrieveBookings" method="post">
             <input type="submit" value="Retrieve Past Booking" />
