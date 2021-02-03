@@ -10,7 +10,8 @@ import java.util.Date;
 
 public class Flight {
     private final long serialVersionUID = -1L ;
-    private String FlightCode, Departure, Destination, FlightVacancy, EmployeeID;
+    private String  Departure, Destination, FlightVacancy, EmployeeID;
+    private int FlightCode;
     private Date DepartureDate;
 
     public Date getDepartureDate() {
@@ -21,11 +22,11 @@ public class Flight {
         this.DepartureDate = DepartureDate;
     }
 
-    public String getFlightCode() {
+    public int getFlightCode() {
         return FlightCode;
     }
 
-    public void setFlightCode(String FlightCode) {
+    public void setFlightCode(int FlightCode) {
         this.FlightCode = FlightCode;
     }
 
