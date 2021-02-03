@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  *
  * @author home
  */
-@WebServlet("/search")
+@WebServlet("/searchflight")
 public class SearchFlightServlet extends HttpServlet {
     
     @Resource(name = "jdbc/collabproj")
