@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,17 +56,46 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         String passportno = request.getParameter("passportno"); //optional
-        String passportexpiry = request.getParameter("expirydate");
+        String passportexpiryString = request.getParameter("expirydate");
         String mobile = request.getParameter("mobileno");
         String plainPassword = request.getParameter("password");
         String password = getSha256(plainPassword);
 
-        String dob = request.getParameter("dob");
+        String dobString = request.getParameter("dob");
         String officeno = request.getParameter("officeno");
         String homeno = request.getParameter("homeno");
         String memberno = request.getParameter("memberno");
         String billingaddress = request.getParameter("billingaddress");
         
+       Date dob = null;
+       Date passportexpiry = null;
+       
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try{
+        
+        dob = (Date) sdf.parse(dobString);
+        passportexpiry = (Date) sdf.parse(passportexpiryString);
+        }
+        catch(ParseException e){
+        System.out.println("Error Parsing dates");
+        
+        }
+        
+        Customer customer = new Customer();
+        customer.setNRICNo(nric);
+                customer.setTitle(title);
+                customer.setName(name);
+                customer.setEmail(email);
+                customer.setHomeAdd(address);
+                customer.setBillingAdd(billingaddress);
+                customer.setPassportNo(passportno);
+                customer.setPassportExpiry(passportexpiry);
+                customer.setMobilePhone(mobile);
+                customer.setDoB(dob);
+                customer.setOfficePhone(officeno);
+                customer.setHomePhone(homeno);
+                customer.setKrisFlyer(memberno);
+                
         System.out.println(plainPassword + "checking password");
 
         String sqlInsertAccFirstPart = "INSERT INTO customer (NRICNo, Title, Name, Email, HomeAdd";
@@ -78,7 +109,7 @@ public class RegisterServlet extends HttpServlet {
         sqlInsertAccFirstPart += " ,PassportNo,PassportExpiry,MobilePhone";
         sqlInsertAccSecondPart += ", ?, ?, ?";
 
-        if (dob != null && !dob.isEmpty()) {
+        if (dobString != null && !dobString.isEmpty()) {
             sqlInsertAccFirstPart += ", DoB";
             sqlInsertAccSecondPart += ", ?";
         }
@@ -127,7 +158,7 @@ public class RegisterServlet extends HttpServlet {
             }
             
             preparedStatement.setString(7, passportno);
-            preparedStatement.setString(8, passportexpiry);
+            preparedStatement.setString(8, passportexpiryString);
             preparedStatement.setString(9, mobile);
             
             
@@ -136,8 +167,8 @@ public class RegisterServlet extends HttpServlet {
             
             
 
-            if (dob != null && !dob.isEmpty()) {
-                preparedStatement.setString(newCounter++, dob);
+            if (dobString != null && !dobString.isEmpty()) {
+                preparedStatement.setString(newCounter++, dobString);
             }
 
             if (officeno != null && !officeno.isEmpty()) {
@@ -232,7 +263,7 @@ public class RegisterServlet extends HttpServlet {
             //Make a client side redirect to the search result page
 
             HttpSession session = request.getSession();
-            session.setAttribute("customerId", email);
+            session.setAttribute("customer", customer);
 
             response.sendRedirect(this.getServletContext().getContextPath() + "/menu.jsp");
         }
