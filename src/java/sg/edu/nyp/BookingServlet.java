@@ -43,16 +43,16 @@ public class BookingServlet extends HttpServlet
             boolean checkupdatevacancy = flightBean.updateVacancy(flightCode);
             if(checkupdatevacancy)
             {
-                System.out.println("mother and son is working!!");
+                System.out.println("checkbookseat and checkupdatevacancy is working!!");
             }
             else{
-                System.out.println("son is not working!!");
+                System.out.println("checkupdatevacancy is not working!!");
             }
             
         }
         else
         {
-             System.out.println("mother is not working!!");
+             System.out.println("checkbookseat is not working!!");
         }
         
         
