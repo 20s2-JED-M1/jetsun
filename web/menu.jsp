@@ -10,6 +10,11 @@
         <h1>Menu</h1>
         <%
                 Customer customer = (Customer) session.getAttribute("customer");
+                
+                if(customer == null){
+                    customer = new Customer();
+                    customer.setName("new customer");
+                }
             %>
         <h3>
             Welcome, <%=customer.getName()%>!
