@@ -36,7 +36,7 @@ and open the template in the editor.
             Date Of Birth: <input type="date" name="dob"/><br/>
             Office Phone Number: <input type="number" name="officeno"/><br/>
             Home Phone Number: <input type="number" name="homeno"/><br/>
-            KrisFlyer Membership Number <input type="number" name="memberno"/><br/>
+            KrisFlyer Membership Number <input type="number" name="memberno" min="15"/><br/>
             Biling Address: <input type="text" name="billingaddress"/><br/>
 
             <input type="submit" value="Register"/> <br/>

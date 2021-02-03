@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sg.edu.nyp;
 
 import java.sql.Connection;
@@ -20,12 +19,14 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class FlightBean {
-    @Resource(name="jdbc/jed")
+
+    @Resource(name = "jdbc/jed")
     private DataSource dsBookCatalogue;
     Connection connection = null;
     PreparedStatement statement = null;
     ResultSet resultset = null;
-    public List<Flight> searchFlight(String searchTerm){
+
+    public List<Flight> searchFlight(String searchTerm) {
         List<Flight> searchResult = new ArrayList<>();
         try {
             String sql = "select * from flight where destination like ? or Departure like ?";
@@ -40,7 +41,7 @@ public class FlightBean {
             resultset = statement.executeQuery();
 
             //retrieval
-            while(resultset.next()){
+            while (resultset.next()) {
                 //Create a book object
                 Flight book = new Flight();
                 //Retrieve the data from the recordset and store it into a book object.
@@ -53,27 +54,27 @@ public class FlightBean {
                 //Store the book object into the list
                 searchResult.add(book);
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
-            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             //clean up memory
-            if(resultset != null){
+            if (resultset != null) {
                 try {
                     resultset.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(statement != null){
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(connection != null){
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
@@ -83,10 +84,11 @@ public class FlightBean {
         }
         return searchResult;
     }
-    public List<Seat> displaySeat(int flightCode){
+
+    public List<Seat> displaySeat(int flightCode) {
         List<Seat> seatList = new ArrayList<>();
-        try{
-            String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
+        try {
+            String sql = "SELECT distinct s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
             //Initializing
             //Get the connection from the DataSource
             connection = dsBookCatalogue.getConnection();
@@ -97,7 +99,7 @@ public class FlightBean {
             resultset = statement.executeQuery();
 
             //retrieval
-            while(resultset.next()){
+            while (resultset.next()) {
                 //Create a book object
                 Seat seats = new Seat();
                 //Retrieve the data from the recordset and store it into a book object.
@@ -106,27 +108,27 @@ public class FlightBean {
                 //Store the book object into the list
                 seatList.add(seats);
             }
-        }catch(SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
-            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             //clean up memory
-            if(resultset != null){
+            if (resultset != null) {
                 try {
                     resultset.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(statement != null){
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(connection != null){
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
@@ -136,12 +138,16 @@ public class FlightBean {
         }
         return seatList;
     }
-    public boolean bookSeat(int seatid, int flightCode, String NRIC, int employeeid)
-    {
+
+    public boolean bookSeat(int seatid, int flightCode, String NRIC, int employeeid) {
        // 
         // 
-          try{
-              
+        System.out.println("NRIC"+ ":"+NRIC);
+        System.out.println("flightCode"+ ":"+flightCode);
+        System.out.println("seatid"+ ":"+seatid);
+        System.out.println("employeeid"+ ":"+employeeid);
+        try {
+
             String sql = "INSERT INTO collabproj.booking (NRICNo, FlightCode,SeatID, EmployeeID, TIMESTAMP) VALUES ( ?,?,?,?,CURRENT_TIMESTAMP)";
             //Initializing
             //Get the connection from the DataSource
@@ -153,29 +159,30 @@ public class FlightBean {
             statement.setInt(3, seatid);
             statement.setInt(4, employeeid);
             //Make a query to the DB using ResultSet through the Statement
-            resultset = statement.executeQuery();
-          
-        }catch(SQLException ex) {
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
-            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } finally {
             //clean up memory
-            if(resultset != null){
+            if (resultset != null) {
                 try {
                     resultset.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(statement != null){
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(connection != null){
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
@@ -185,10 +192,10 @@ public class FlightBean {
         }
         return true;
     }
-    public boolean updateVacancy(int flightCode)
-    {
-       try{
-              
+
+    public boolean updateVacancy(int flightCode) {
+        try {
+
             String sql = "UPDATE collabproj.flight SET FlightVacancy = FlightVacancy - 1 WHERE FlightCode = ?";
             //Initializing
             //Get the connection from the DataSource
@@ -196,31 +203,32 @@ public class FlightBean {
             //Create a state,emt using the Connection
             statement = connection.prepareStatement(sql);
             statement.setInt(1, flightCode);
-  
+
             //Make a query to the DB using ResultSet through the Statement
-            resultset = statement.executeQuery();
-          
-        }catch(SQLException ex) {
+            statement.executeUpdate();
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
-            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);                 
+            Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } finally {
             //clean up memory
-            if(resultset != null){
+            if (resultset != null) {
                 try {
                     resultset.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(statement != null){
+            if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(FlightBean.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(connection != null){
+            if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {

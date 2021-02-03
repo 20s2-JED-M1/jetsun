@@ -35,6 +35,7 @@ public class BookingServlet extends HttpServlet
         int employeeId = 1;
         
         System.out.println("flightCode: " + flightCode);
+        System.out.println("seatID before function call: " + seatID);
         boolean checkbookSeat = flightBean.bookSeat(seatID, flightCode, nric, employeeId);
         
         if(checkbookSeat)
