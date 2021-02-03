@@ -35,12 +35,12 @@ public class BookingServlet extends HttpServlet
         int employeeId = 1;
         
         System.out.println("flightCode: " + flightCode);
-        boolean checkyourmother = flightBean.bookSeat(seatID, flightCode, nric, employeeId);
+        boolean checkbookSeat = flightBean.bookSeat(seatID, flightCode, nric, employeeId);
         
-        if(checkyourmother)
+        if(checkbookSeat)
         {
-            boolean checkyourson = flightBean.updateVacancy(flightCode);
-            if(checkyourson)
+            boolean checkupdatevacancy = flightBean.updateVacancy(flightCode);
+            if(checkupdatevacancy)
             {
                 System.out.println("mother and son is working!!");
             }

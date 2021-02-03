@@ -44,7 +44,7 @@ public class FlightBean {
                 //Create a book object
                 Flight book = new Flight();
                 //Retrieve the data from the recordset and store it into a book object.
-                book.setFlightCode(resultset.getString("FlightCode"));
+                book.setFlightCode(resultset.getInt("FlightCode"));
                 book.setDeparture(resultset.getString("Departure"));
                 book.setDestination(resultset.getString("Destination"));
                 book.setDepartureDate(resultset.getDate("DepartureDate"));
@@ -83,7 +83,7 @@ public class FlightBean {
         }
         return searchResult;
     }
-    public List<Seat> displaySeat(String flightCode){
+    public List<Seat> displaySeat(int flightCode){
         List<Seat> seatList = new ArrayList<>();
         try{
             String sql = "SELECT s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
@@ -92,7 +92,7 @@ public class FlightBean {
             connection = dsBookCatalogue.getConnection();
             //Create a state,emt using the Connection
             statement = connection.prepareStatement(sql);
-            statement.setString(1, flightCode);
+            statement.setInt(1, flightCode);
             //Make a query to the DB using ResultSet through the Statement
             resultset = statement.executeQuery();
 
