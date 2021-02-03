@@ -8,12 +8,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SaveMore IT Store</title>
+        <title>Change password</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <b>SaveMore IT Store System Menu - Change Password</b><br/>
+        <b>Change Password</b><br/>
         <p>
             <form action="password" method="post">
                 Email: 

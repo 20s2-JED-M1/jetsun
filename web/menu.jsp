@@ -25,7 +25,6 @@
         <form action="retrieveBookings" method="post">
             <input type="submit" value="Retrieve Past Booking" />
         </form>
-        <a href="manageAccount.jsp">Manage Account</a>
         <br/>
         <br/>
         <form action="logout" method="post">

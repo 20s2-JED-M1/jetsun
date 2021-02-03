@@ -1,5 +1,5 @@
 function matchPassword() {
-    alert("macthpassword2");
+    alert("matchpassword2");
     var pw1 = document.getElementById("pass1").value;
     var pw2 = document.getElementById("pass2").value;
     var nric = document.getElementById("nric").value;
