@@ -9,13 +9,14 @@ and open the template in the editor.
         <title>SaveMore IT Store</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/validation.js" type="text/javascript"></script>
+        <script src="js/validation.js" type="text/javascript">
+        </script>
     </head>
     <body>
 
         <form name="register" action="validate" method="post" onsubmit="return matchPassword()">
 
-            NRIC No: <input type="text" name="nric" required/><br/>
+            NRIC No: <input type="text" name="nric" id="nric" required/><br/>
             Title : <select name="title" id="title">
                 <option value="Mr">Mr</option>
                 <option value="Mrs">Mrs</option>
