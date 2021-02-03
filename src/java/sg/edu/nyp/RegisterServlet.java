@@ -66,36 +66,35 @@ public class RegisterServlet extends HttpServlet {
         String homeno = request.getParameter("homeno");
         String memberno = request.getParameter("memberno");
         String billingaddress = request.getParameter("billingaddress");
-        
-       Date dob = null;
-       Date passportexpiry = null;
-       
+
+        Date dob = null;
+        Date passportexpiry = null;
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try{
-        
-        dob = (Date) sdf.parse(dobString);
-        passportexpiry = (Date) sdf.parse(passportexpiryString);
+        try {
+
+            dob = (Date) sdf.parse(dobString);
+            passportexpiry = (Date) sdf.parse(passportexpiryString);
+        } catch (ParseException e) {
+            System.out.println("Error Parsing dates");
+
         }
-        catch(ParseException e){
-        System.out.println("Error Parsing dates");
-        
-        }
-        
+
         Customer customer = new Customer();
         customer.setNRICNo(nric);
-                customer.setTitle(title);
-                customer.setName(name);
-                customer.setEmail(email);
-                customer.setHomeAdd(address);
-                customer.setBillingAdd(billingaddress);
-                customer.setPassportNo(passportno);
-                customer.setPassportExpiry(passportexpiry);
-                customer.setMobilePhone(mobile);
-                customer.setDoB(dob);
-                customer.setOfficePhone(officeno);
-                customer.setHomePhone(homeno);
-                customer.setKrisFlyer(memberno);
-                
+        customer.setTitle(title);
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setHomeAdd(address);
+        customer.setBillingAdd(billingaddress);
+        customer.setPassportNo(passportno);
+        customer.setPassportExpiry(passportexpiry);
+        customer.setMobilePhone(mobile);
+        customer.setDoB(dob);
+        customer.setOfficePhone(officeno);
+        customer.setHomePhone(homeno);
+        customer.setKrisFlyer(memberno);
+
         System.out.println(plainPassword + "checking password");
 
         String sqlInsertAccFirstPart = "INSERT INTO customer (NRICNo, Title, Name, Email, HomeAdd";
@@ -153,37 +152,36 @@ public class RegisterServlet extends HttpServlet {
             //generate position where the variable is to be added
             int counter = 6;
 
-            if (billingaddress != null && !billingaddress.isEmpty()) {
+            if (billingaddress != null && !billingaddress.isEmpty() && billingaddress.equals(address)) {
+                preparedStatement.setString(counter++, null);
+                
+            } else if (billingaddress != null && !billingaddress.isEmpty() && !billingaddress.equals(address)) {
                 preparedStatement.setString(counter++, billingaddress);
+
             }
-            
             preparedStatement.setString(7, passportno);
             preparedStatement.setString(8, passportexpiryString);
             preparedStatement.setString(9, mobile);
-            
-            
-            
-             int newCounter = 10;
-            
-            
+
+            int newCounter = 10;
 
             if (dobString != null && !dobString.isEmpty()) {
                 preparedStatement.setString(newCounter++, dobString);
             }
 
             if (officeno != null && !officeno.isEmpty()) {
-               preparedStatement.setString(newCounter++, officeno);
+                preparedStatement.setString(newCounter++, officeno);
             }
             if (homeno != null && !homeno.isEmpty()) {
                 preparedStatement.setString(newCounter++, homeno);
             }
-            
+
             if (memberno != null && !memberno.isEmpty()) {
                 preparedStatement.setString(newCounter++, memberno);
             }
-            
+
             preparedStatement.setString(14, password);
-            
+
             System.out.println("checking statement " + preparedStatement);
 
             //Insert date into the database
