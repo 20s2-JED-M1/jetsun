@@ -20,7 +20,7 @@
                         System.out.println("Inside for statement: seat.getId()" + seat.getId());
             %>
             <tr>
-            <form action="bookseat" name="name" method="post">
+                <form action="bookseat" name="name" method="post">
                 <td><%=seat.getSeatNum()%></td>
                 <input type="hidden" id="seatid" name="seatid" value="<%=seat.getId()%>">
                 <td><input type="submit" value="Book"></td>

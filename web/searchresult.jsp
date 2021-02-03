@@ -17,7 +17,7 @@
             Search results for "<b><%=session.getAttribute("searchterm")%></b>"
         </p>
         <hr/>
-        <form action="seat" method="post" name="buy">
+       
             <!--Results-->
             <table>
                 <tr>
@@ -38,23 +38,27 @@
                 <%
                     }else{
                         for(Flight book : searchresult){
+                            System.out.println();
                 %>
+                
                 <tr>
+                   <form action="seat" method="post" name="buy">
                     <td><%=book.getFlightCode()%></td>
                     <td><%=book.getDeparture()%></td>
                     <td><%=book.getDestination()%></td>
                     <td><%=book.getDepartureDate()%></td>
                     <td><%=book.getFlightVacancy()%></td>
+                    <input type="hidden" id="flightCode" name="flightCode" value="<%=book.getFlightCode()%>">
                     <td><input type="submit" value="Book Seat"></td>
+                   </form>
                 </tr>
-                 <input type="hidden" id="flightCode" name="flightCode" value="<%=book.getFlightCode()%>">
                  <%
                     }%>
             </table>
            
             <% }
             %>
-        </form>
+      
         <hr/>
         <a href="searchflight.jsp">Do another search</a><br/>
         <a href="menu.jsp">Go back to menu</a>

@@ -88,7 +88,7 @@ public class FlightBean {
     public List<Seat> displaySeat(int flightCode) {
         List<Seat> seatList = new ArrayList<>();
         try {
-            String sql = "SELECT distinct s.Id, s.SeatNum FROM collabproj.seat s inner join collabproj.booking b on s.Id != b.SeatID inner join collabproj.flight f on b.FlightCode = f.FlightCode where b.FlightCode = ?";
+            String sql = "select * from collabproj.seat where id not in (select SeatID from collabproj.booking where FlightCode = ?);";
             //Initializing
             //Get the connection from the DataSource
             connection = dsBookCatalogue.getConnection();
