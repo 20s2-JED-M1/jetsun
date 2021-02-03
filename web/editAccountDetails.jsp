@@ -39,6 +39,6 @@
             session.setAttribute("wrongEmailPasswordChange", null);
         %>
         </p>
-        <a href="account.jsp">Back</a><br/>
+        <a href="menu.jsp">Back</a><br/>
     </body>
 </html>

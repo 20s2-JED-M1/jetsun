@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
 
     public static String getSha256(String value) {
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             md.update(value.getBytes());
             return bytesToHex(md.digest());
         } catch (Exception ex) {

@@ -44,6 +44,6 @@
                 }
             %>
         </table>
-        <a href="/jetsun/menu.jsp">Back To Main Menu</a>
+        <a href="menu.jsp">Back To Main Menu</a>
     </body>
 </html>
