@@ -1,6 +1,7 @@
 package sg.edu.nyp;
 
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,12 +15,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+import static sg.edu.nyp.RegisterServlet.getSha256;
+
+
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     @Resource(name = "jdbc/jed")
     private DataSource userCatalogue;
+    
+        public static String getSha256(String value) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(value.getBytes());
+            return bytesToHex(md.digest());
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    private static String bytesToHex(byte[] bytes) {
+        StringBuffer result = new StringBuffer();
+        for (byte b : bytes) {
+            result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        }
+        return result.toString();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -28,7 +50,7 @@ public class LoginServlet extends HttpServlet {
         //Get user input
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
+        password = getSha256(password);
         //If user input can be found in db, isSuccessful will be true
         boolean isSuccessful = false;
         
